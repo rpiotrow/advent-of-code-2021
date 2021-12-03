@@ -8,6 +8,6 @@ object Day01SonarSweepSolutionSpec extends DefaultRunnableSpec:
   def spec = suite("SonarSweepSolutionSpec")(
     test("SonarSweep solution") {
       for solution <- SonarSweep.solution
-      yield assert(solution)(equalTo((1475L, 0L)))
+      yield assert(solution)(equalTo((1475L, 1516L)))
     }
   )
