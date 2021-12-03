@@ -1,4 +1,4 @@
-package io.github.rpiotrow.advent2021.day01
+package io.github.rpiotrow.advent2021
 
 import io.github.rpiotrow.advent2021.day01.SonarSweep
 import zio.test.Assertion.*

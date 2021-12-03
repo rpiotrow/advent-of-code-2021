@@ -8,7 +8,7 @@ import java.io.IOException
 object Input:
   def readStrings(inputFileName: String): ZStream[Any, String, String] =
     val inputStream = Option(this.getClass.getClassLoader.getResourceAsStream(inputFileName))
-    val zioInputStream = ZIO.fromOption(inputStream).orElseFail(new IOException("not found"))
+    val zioInputStream = ZIO.fromOption(inputStream).orElseFail(new IOException("input file not found"))
     ZStream
       .fromInputStreamZIO(zioInputStream)
       .via(ZPipeline.utf8Decode)
