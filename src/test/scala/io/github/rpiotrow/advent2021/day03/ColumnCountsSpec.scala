@@ -1,6 +1,5 @@
 package io.github.rpiotrow.advent2021.day03
 
-import zio.stream.ZStream
 import zio.test.Assertion.*
 import zio.test.*
 
