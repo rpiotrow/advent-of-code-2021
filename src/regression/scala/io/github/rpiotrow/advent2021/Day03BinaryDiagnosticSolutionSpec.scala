@@ -8,6 +8,6 @@ object Day03BinaryDiagnosticSolutionSpec extends DefaultRunnableSpec:
   def spec = suite("BinaryDiagnosticSolutionSpec")(
     test("BinaryDiagnostic solution") {
       for solution <- BinaryDiagnostic.solution
-        yield assert(solution)(equalTo((741950L, 0L)))
+      yield assert(solution)(equalTo((741950L, 0L)))
     }
   )

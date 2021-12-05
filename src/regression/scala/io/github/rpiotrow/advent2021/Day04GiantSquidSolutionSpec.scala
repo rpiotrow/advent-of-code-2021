@@ -8,6 +8,6 @@ object Day04GiantSquidSolutionSpec extends DefaultRunnableSpec:
   def spec = suite("GiantSquidSolutionSpec")(
     test("GiantSquid solution") {
       for solution <- GiantSquid.solution
-        yield assert(solution)(equalTo((51776L, 0L)))
+      yield assert(solution)(equalTo((51776L, 0L)))
     }
   )
