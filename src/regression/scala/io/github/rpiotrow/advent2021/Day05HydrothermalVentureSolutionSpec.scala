@@ -8,6 +8,6 @@ object Day05HydrothermalVentureSolutionSpec extends DefaultRunnableSpec:
   def spec = suite("HydrothermalVentureSolutionSpec")(
     test("HydrothermalVenture solution") {
       for solution <- HydrothermalVenture.solution
-      yield assert(solution)(equalTo((5169L, 0L)))
+      yield assert(solution)(equalTo((5169L, 22083L)))
     }
   )

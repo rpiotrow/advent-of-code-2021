@@ -10,5 +10,7 @@ object HydrothermalVenture:
       vents <- Vents.parse
       diagram = Diagram(vents)
       count1 <- diagram.countOverlappingPointsForVerticalAndHorizontalVentsLines()
-      _ <- Console.printLine(s"The number of points where at least two lines overlap is $count1")
-    yield (count1, 0L)
+      count2 <- diagram.countOverlappingPointsForVerticalHorizontalAndDiagonalVentsLines()
+      _ <- Console.printLine(s"The number of points where at least two (vertical or horizontal) lines overlap is $count1")
+      _ <- Console.printLine(s"The number of points where at least two (any) lines overlap is $count2")
+    yield (count1, count2)

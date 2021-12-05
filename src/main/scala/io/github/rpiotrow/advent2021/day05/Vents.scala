@@ -20,7 +20,15 @@ case class HorizontalLine(y: Int, xStart: Int, xEnd: Int) extends VentsLine:
   def points: List[Point] = fromTo(xStart, xEnd).map(x => Point(x, y))
 
 case class DiagonalLine(xStart: Int, yStart: Int, xEnd: Int, yEnd: Int) extends VentsLine:
-  def points: List[Point] = ???
+  def points: List[Point] =
+    val higherPoint = if yStart < yEnd then Point(xStart, yStart) else Point(xEnd, yEnd)
+    val lowerPoint = if yStart < yEnd then Point(xEnd, yEnd) else Point(xStart, yStart)
+    val xs = if higherPoint.x < lowerPoint.x then
+      higherPoint.x.to(lowerPoint.x).toList // going right
+    else
+      higherPoint.x.to(lowerPoint.x, -1).toList // going left
+    val ys = higherPoint.y.to(lowerPoint.y)
+    (xs zip ys).map(Point.apply)
 
 case class Vents(vertical: List[VerticalLine], horizontal: List[HorizontalLine], diagonal: List[DiagonalLine])
 
