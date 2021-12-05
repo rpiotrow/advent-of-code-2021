@@ -10,16 +10,16 @@ object Bingo:
   object Numbers:
     def apply(values: List[Int]) = new Numbers(values)
 
-  case class Board private (rows: List[Numbers], columns: List[Numbers], isWinner: Boolean):
+  case class Board private (id: Long, rows: List[Numbers], columns: List[Numbers], isWinner: Boolean):
     def mark(number: Int): Board =
       val newRows = rows.map(_.mark(number))
       val newColumns = columns.map(_.mark(number))
       val newIsWinner = isWinner || check(newRows) || check(newColumns)
-      new Board(newRows, newColumns, newIsWinner)
+      new Board(id, newRows, newColumns, newIsWinner)
     def sumUnmarked: Int = rows.map(_.unmarked.sum).sum
     private def check(list: List[Numbers]): Boolean = list.exists(_.unmarked.isEmpty)
   object Board:
-    def apply(rows: List[List[Int]]): Board =
+    def apply(id: Long, rows: List[List[Int]]): Board =
       val columns = rows match
         case List(
               List(a11, a21, a31, a41, a51),
@@ -36,13 +36,14 @@ object Bingo:
             Numbers(List(a51, a52, a53, a54, a55))
           )
         case _ => throw new IllegalArgumentException("it's not a bingo data!")
-      new Board(rows.map(Numbers.apply), columns, false)
+      new Board(id, rows.map(Numbers.apply), columns, false)
 
-  case class Game private (boards: List[Board], winner: Option[Board]):
+  case class Game private (boards: List[Board], ranking: List[Board]):
     def mark(number: Int): Game =
       val newBoards = boards.map(_.mark(number))
-      new Game(newBoards, newBoards.find(_.isWinner))
+      val newWinners = newBoards.filter(_.isWinner).filterNot(b => ranking.exists(_.id == b.id))
+      new Game(newBoards, ranking.appendedAll(newWinners))
   object Game:
-    def apply(boards: List[Board]) = new Game(boards, None)
+    def apply(boards: List[Board]) = new Game(boards, List.empty[Board])
 
   case class DrawnNumbers(list: List[Int])

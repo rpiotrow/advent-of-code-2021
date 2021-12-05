@@ -63,8 +63,8 @@ object BingoSpec extends DefaultRunnableSpec:
       val afterSixMore = afterFive.mark(17).mark(23).mark(2).mark(0).mark(14).mark(21)
       val afterStillOneMore = afterSixMore.mark(24)
 
-      assert(afterFive.winner.isDefined)(equalTo(false)) &&
-      assert(afterSixMore.winner.isDefined)(equalTo(false)) &&
-      assert(afterStillOneMore.winner.isDefined)(equalTo(true))
+      assert(afterFive.ranking.size)(equalTo(0)) &&
+      assert(afterSixMore.ranking.size)(equalTo(0)) &&
+      assert(afterStillOneMore.ranking.size)(equalTo(1))
     }
   )

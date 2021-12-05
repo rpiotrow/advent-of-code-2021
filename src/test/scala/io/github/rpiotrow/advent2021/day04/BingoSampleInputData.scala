@@ -3,6 +3,7 @@ package io.github.rpiotrow.advent2021.day04
 object BingoSampleInputData:
 
   private[day04] val startingBoard1 = Bingo.Board(
+    id = 0,
     rows = List(
       List(22, 13, 17, 11, 0),
       List(8, 2, 23, 4, 24),
@@ -12,6 +13,7 @@ object BingoSampleInputData:
     )
   )
   private[day04] val startingBoard2 = Bingo.Board(
+    id = 1,
     rows = List(
       List(3, 15, 0, 2, 22),
       List(9, 18, 13, 17, 5),
@@ -21,6 +23,7 @@ object BingoSampleInputData:
     )
   )
   private[day04] val startingBoard3 = Bingo.Board(
+    id = 2,
     rows = List(
       List(14, 21, 17, 24, 4),
       List(10, 16, 15, 9, 19),

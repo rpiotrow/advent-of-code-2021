@@ -30,12 +30,13 @@ object BingoSetup:
     stream
       .drop(1)
       .grouped(6)
-      .mapZIO { chunk =>
+      .zipWithIndex
+      .mapZIO { case (chunk, index) =>
         ZIO
           .collectAll(chunk.toList.take(5).map { line =>
             ZIO.foreach(line.split(' ').toList.filter(_.nonEmpty))(parseInt)
           })
-          .map(Bingo.Board.apply)
+          .map(rows => Bingo.Board(index, rows))
       }
       .runCollect
       .map(boards => Bingo.Game(boards.toList))
