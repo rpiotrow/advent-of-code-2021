@@ -16,3 +16,6 @@ object Input:
 
   def readLines(inputFileName: String): ZStream[Any, String, String] =
     readStrings(inputFileName).via(ZPipeline.splitLines)
+
+  def parseInt(s: String): ZIO[Any, String, Int] =
+    ZIO.attempt(s.toInt).mapError(ex => s"Cannot parse '$s' as Int: ${ex.getMessage}")

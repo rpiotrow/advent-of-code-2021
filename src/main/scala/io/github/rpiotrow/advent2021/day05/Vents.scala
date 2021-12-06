@@ -1,6 +1,7 @@
 package io.github.rpiotrow.advent2021.day05
 
 import io.github.rpiotrow.advent2021.Input
+import io.github.rpiotrow.advent2021.Input.parseInt
 import zio.ZIO
 
 case class Point(x: Int, y: Int)
@@ -33,7 +34,6 @@ case class DiagonalLine(xStart: Int, yStart: Int, xEnd: Int, yEnd: Int) extends 
 case class Vents(vertical: List[VerticalLine], horizontal: List[HorizontalLine], diagonal: List[DiagonalLine])
 
 object Vents:
-  private def parseInt(s: String) = ZIO.attempt(s.toInt).mapError(_.getMessage)
   def parse: ZIO[Any, String, Vents] =
     Input
       .readLines("day05.input")

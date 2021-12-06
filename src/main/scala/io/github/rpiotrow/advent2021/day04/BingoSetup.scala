@@ -1,6 +1,7 @@
 package io.github.rpiotrow.advent2021.day04
 
 import io.github.rpiotrow.advent2021.Input
+import io.github.rpiotrow.advent2021.Input.parseInt
 import zio.ZIO
 import zio.stream.{ZSink, ZStream}
 
@@ -40,5 +41,3 @@ object BingoSetup:
       }
       .runCollect
       .map(boards => Bingo.Game(boards.toList))
-
-  private def parseInt(s: String) = ZIO.attempt(s.toInt).mapError(_.getMessage)

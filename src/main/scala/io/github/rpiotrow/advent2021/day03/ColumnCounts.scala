@@ -9,7 +9,7 @@ case class Column(zeros: Int, ones: Int):
 
 class ColumnCounts(private val counts: List[Column]):
 
-  def   gammaRate: Int =
+  def gammaRate: Int =
     Integer.parseInt(gammaRateBinary, 2)
 
   def epsilonRate: Int =
