@@ -1,6 +1,5 @@
 package io.github.rpiotrow.advent2021.day05
 
-import io.github.rpiotrow.advent2021.day05.DiagramSpec.test
 import zio.test.Assertion.*
 import zio.test.*
 
