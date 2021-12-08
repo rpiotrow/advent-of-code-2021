@@ -8,6 +8,7 @@ import io.github.rpiotrow.advent2021.day04.GiantSquid
 import io.github.rpiotrow.advent2021.day05.HydrothermalVenture
 import io.github.rpiotrow.advent2021.day06.Lanternfish
 import io.github.rpiotrow.advent2021.day07.TheTreacheryOfWhales
+import io.github.rpiotrow.advent2021.day08.SevenSegmentSearch
 import zio.*
 
 type Solution = ZIO[ZEnv, String | java.io.IOException, (Long, Long)]
@@ -19,7 +20,8 @@ private val days: Map[Int, Solution] = Map(
   4 -> GiantSquid.solution,
   5 -> HydrothermalVenture.solution,
   6 -> Lanternfish.solution,
-  7 -> TheTreacheryOfWhales.solution
+  7 -> TheTreacheryOfWhales.solution,
+  8 -> SevenSegmentSearch.solution
 )
 
 object Main extends ZIOAppDefault:
