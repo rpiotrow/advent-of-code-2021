@@ -9,6 +9,7 @@ import io.github.rpiotrow.advent2021.day05.HydrothermalVenture
 import io.github.rpiotrow.advent2021.day06.Lanternfish
 import io.github.rpiotrow.advent2021.day07.TheTreacheryOfWhales
 import io.github.rpiotrow.advent2021.day08.SevenSegmentSearch
+import io.github.rpiotrow.advent2021.day09.SmokeBasin
 import io.github.rpiotrow.advent2021.day10.SyntaxScoring
 import zio.*
 
@@ -23,6 +24,7 @@ private val days: Map[Int, Solution] = Map(
   6 -> Lanternfish.solution,
   7 -> TheTreacheryOfWhales.solution,
   8 -> SevenSegmentSearch.solution,
+  9 -> SmokeBasin.solution,
   10 -> SyntaxScoring.solution
 )
 

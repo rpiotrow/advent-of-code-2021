@@ -1,7 +1,5 @@
 package io.github.rpiotrow.advent2021.day10
 
-import io.github.rpiotrow.advent2021.day07.Crabs
-import io.github.rpiotrow.advent2021.day07.CrabsSpec.{crabs, suite, test}
 import zio.test.Assertion.*
 import zio.test.{DefaultRunnableSpec, *}
 
