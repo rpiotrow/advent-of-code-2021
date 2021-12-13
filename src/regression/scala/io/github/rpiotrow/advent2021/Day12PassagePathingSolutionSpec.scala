@@ -8,7 +8,6 @@ object Day12PassagePathingSolutionSpec extends DefaultRunnableSpec:
   def spec = suite("PassagePathingSpec")(
     test("PassagePathing solution") {
       for solution <- PassagePathing.solution
-        yield assert(solution)(equalTo((4720L, 147848L)))
+      yield assert(solution)(equalTo((4720L, 147848L)))
     }
   )
-

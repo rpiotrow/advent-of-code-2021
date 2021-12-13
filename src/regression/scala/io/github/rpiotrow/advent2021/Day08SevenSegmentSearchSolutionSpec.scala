@@ -8,6 +8,6 @@ object Day08SevenSegmentSearchSolutionSpec extends DefaultRunnableSpec:
   def spec = suite("SevenSegmentSearchSpec")(
     test("SevenSegmentSearch solution") {
       for solution <- SevenSegmentSearch.solution
-        yield assert(solution)(equalTo((476L, 0L)))
+      yield assert(solution)(equalTo((476L, 0L)))
     }
   )
