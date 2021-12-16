@@ -10,6 +10,8 @@ object PolymerTemplate:
       template.toList.groupMapReduce(identity)(_ => 1L)(_ + _).toList.sortBy(_._2)
     def process(rules: InsertionRules, steps: Int): PolymerTemplate =
       1.to(steps).foldLeft(template) { case (t, step) => t.process(rules) }
+    def charList: List[Char] = template.toList
+    def firstChar: Char = template.head
     private def process(rules: InsertionRules): PolymerTemplate =
       template.toList
         .sliding(2)

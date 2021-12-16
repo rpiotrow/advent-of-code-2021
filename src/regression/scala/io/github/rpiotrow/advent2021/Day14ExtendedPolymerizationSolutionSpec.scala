@@ -8,6 +8,6 @@ object Day14ExtendedPolymerizationSolutionSpec extends DefaultRunnableSpec:
   def spec = suite("ExtendedPolymerizationSpec")(
     test("ExtendedPolymerization solution") {
       for solution <- ExtendedPolymerization.solution
-      yield assert(solution)(equalTo((2509L, 0L)))
+      yield assert(solution)(equalTo((2509L, 2827627697643L)))
     }
   )
