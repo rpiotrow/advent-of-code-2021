@@ -12,7 +12,7 @@ lazy val root = project
   .configs(RegressionConfig)
   .settings(
     name := "advent-of-code-2021",
-    libraryDependencies ++= Seq(zio, zioStreams, scopt, zioTest, zioTestSbt),
+    libraryDependencies ++= Seq(zio, zioStreams, scopt, scodecBits, zioTest, zioTestSbt),
     inConfig(RegressionConfig)(Defaults.testSettings),
     RegressionConfig  / classpathConfiguration := Test
   )
