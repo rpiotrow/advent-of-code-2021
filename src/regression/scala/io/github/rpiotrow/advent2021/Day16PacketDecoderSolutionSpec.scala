@@ -8,6 +8,6 @@ object Day16PacketDecoderSolutionSpec extends DefaultRunnableSpec:
   def spec = suite("PacketDecoderSpec")(
     test("PacketDecoder solution") {
       for solution <- PacketDecoder.solution
-      yield assert(solution)(equalTo((843L, 0L)))
+      yield assert(solution)(equalTo((843L, 5390807940351L)))
     }
   )

@@ -1,19 +1,68 @@
 package io.github.rpiotrow.advent2021.day16
 
+import io.github.rpiotrow.advent2021.day16.Operator.GreaterThan
 import scodec.bits.*
 import zio.ZIO
 import zio.stream.ZStream
 
-enum Packet(val version: Byte, val typeId: Byte):
+sealed trait Packet(val version: Byte):
+  def versionNumbers: List[Byte]
+  def evaluate: Long
 
-  def versionNumbers: List[Byte] =
-    this match
-      case LiteralValue(version, _)         => List(version)
-      case Operator(version, _, subPackets) => version :: subPackets.flatMap(_.versionNumbers)
+case class LiteralValue(override val version: Byte, value: Long) extends Packet(version):
+  override def versionNumbers: List[Byte] = List(version)
+  override def evaluate: Long = value
 
-  case LiteralValue(override val version: Byte, val value: Long) extends Packet(version, 4)
-  case Operator(override val version: Byte, override val typeId: Byte, val subPackets: List[Packet])
-      extends Packet(version, typeId)
+enum Operator(override val version: Byte) extends Packet(version):
+
+  override def evaluate: Long = this match {
+    case Sum(_, args) => args.map(_.evaluate).sum
+    case Product(_, args) => args.map(_.evaluate).product
+    case Minimum(_, args) => args.map(_.evaluate).min
+    case Maximum(_, args) => args.map(_.evaluate).max
+    case GreaterThan(_, first, second) => if first.evaluate > second.evaluate then 1L else 0L
+    case LessThan(_, first, second) => if first.evaluate < second.evaluate then 1L else 0L
+    case EqualTo(_, first, second) => if first.evaluate == second.evaluate then 1L else 0L
+  }
+
+  override def versionNumbers: List[Byte] = version :: (this match {
+    case Sum(_, args) => args.flatMap(_.versionNumbers)
+    case Product(_, args) => args.flatMap(_.versionNumbers)
+    case Minimum(_, args) => args.flatMap(_.versionNumbers)
+    case Maximum(_, args) => args.flatMap(_.versionNumbers)
+    case GreaterThan(_, first, second) => first.versionNumbers ++ second.versionNumbers
+    case LessThan(_, first, second) => first.versionNumbers ++ second.versionNumbers
+    case EqualTo(_, first, second) => first.versionNumbers ++ second.versionNumbers
+  })
+
+  case Sum(override val version: Byte, args: List[Packet]) extends Operator(version)
+  case Product(override val version: Byte, args: List[Packet]) extends Operator(version)
+  case Minimum(override val version: Byte, args: List[Packet]) extends Operator(version)
+  case Maximum(override val version: Byte, args: List[Packet]) extends Operator(version)
+  case GreaterThan(override val version: Byte, first: Packet, second: Packet) extends Operator(version)
+  case LessThan(override val version: Byte, first: Packet, second: Packet) extends Operator(version)
+  case EqualTo(override val version: Byte, first: Packet, second: Packet) extends Operator(version)
+
+object Operator:
+  def from(version: Byte, typeId: Byte, subPackets: List[Packet]): ZIO[Any, String, Operator] =
+    typeId match
+      case 0 => ZIO.succeed(Sum(version, subPackets))
+      case 1 => ZIO.succeed(Product(version, subPackets))
+      case 2 => ZIO.succeed(Minimum(version, subPackets))
+      case 3 => ZIO.succeed(Maximum(version, subPackets))
+      case 5 => subPackets match {
+        case second :: first :: nil => ZIO.succeed(GreaterThan(version, first, second))
+        case _ => ZIO.fail("There should be only two sub-packets for GreaterThan")
+      }
+      case 6 => subPackets match {
+        case second :: first :: nil => ZIO.succeed(LessThan(version, first, second))
+        case _ => ZIO.fail("There should be only two sub-packets for LessThan")
+      }
+      case 7 => subPackets match {
+        case second :: first :: nil => ZIO.succeed(EqualTo(version, first, second))
+        case _ => ZIO.fail("There should be only two sub-packets for EqualTo")
+      }
+      case _ => ZIO.fail("Ups! That's not an operator packet!")
 
 object Packet:
 
@@ -71,7 +120,8 @@ object Packet:
         if lengthId == 1 then parsePackageListCount(lengthIdLessBits)
         else parsePackageListLength(lengthIdLessBits)
       (subPackets, subPacketsLessBits) = subPacketsTuple
-    yield (Operator(version, typeId, subPackets), subPacketsLessBits)
+      operator <- Operator.from(version, typeId, subPackets)
+    yield (operator, subPacketsLessBits)
 
   private def parsePackageListCount(bits: BitVector): ZIO[Any, String, (List[Packet], BitVector)] =
     for

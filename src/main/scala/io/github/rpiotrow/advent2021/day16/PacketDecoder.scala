@@ -13,5 +13,7 @@ object PacketDecoder:
       bits <- ZIO.getOrFailWith("not parseable input")(BitVector.fromHex(inputHex))
       packet <- Packet.parse(bits)
       versionNumbersSum = packet.versionNumbers.map(_.toLong).sum
+      value = packet.evaluate
       _ <- Console.printLine(s"Sum of all version numbers is $versionNumbersSum")
-    yield (versionNumbersSum, 0L)
+      _ <- Console.printLine(s"Value of the expression is $value")
+    yield (versionNumbersSum, value)
