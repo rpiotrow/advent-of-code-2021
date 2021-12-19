@@ -8,6 +8,6 @@ object Day17TrickShotSolutionSpec extends DefaultRunnableSpec:
   def spec = suite("TrickShotSpec")(
     test("TrickShot solution") {
       for solution <- TrickShot.solution
-        yield assert(solution)(equalTo((9870L, 0L)))
+        yield assert(solution)(equalTo((9870L, 5523L)))
     }
   )
