@@ -16,6 +16,7 @@ import io.github.rpiotrow.advent2021.day13.TransparentOrigami
 import io.github.rpiotrow.advent2021.day14.ExtendedPolymerization
 import io.github.rpiotrow.advent2021.day16.PacketDecoder
 import io.github.rpiotrow.advent2021.day17.TrickShot
+import io.github.rpiotrow.advent2021.day21.DiracDice
 import zio.*
 
 type Solution = ZIO[ZEnv, String | java.io.IOException, (Long, Long)]
@@ -35,7 +36,8 @@ private val days: Map[Int, Solution] = Map(
   13 -> TransparentOrigami.solution,
   14 -> ExtendedPolymerization.solution,
   16 -> PacketDecoder.solution,
-  17 -> TrickShot.solution
+  17 -> TrickShot.solution,
+  21 -> DiracDice.solution
 )
 
 object Main extends ZIOAppDefault:
