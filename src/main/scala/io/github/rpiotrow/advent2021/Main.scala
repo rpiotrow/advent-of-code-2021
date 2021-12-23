@@ -16,6 +16,7 @@ import io.github.rpiotrow.advent2021.day13.TransparentOrigami
 import io.github.rpiotrow.advent2021.day14.ExtendedPolymerization
 import io.github.rpiotrow.advent2021.day16.PacketDecoder
 import io.github.rpiotrow.advent2021.day17.TrickShot
+import io.github.rpiotrow.advent2021.day20.TrenchMap
 import io.github.rpiotrow.advent2021.day21.DiracDice
 import zio.*
 
@@ -37,6 +38,7 @@ private val days: Map[Int, Solution] = Map(
   14 -> ExtendedPolymerization.solution,
   16 -> PacketDecoder.solution,
   17 -> TrickShot.solution,
+  20 -> TrenchMap.solution,
   21 -> DiracDice.solution
 )
 
