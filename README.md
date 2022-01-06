@@ -28,3 +28,5 @@ $ sbt regression:test
 
 ## Used libraries
  * [zio](https://zio.dev/)
+ * [scodec](http://scodec.org/)
+ * [scopt](https://github.com/scopt/scopt)
